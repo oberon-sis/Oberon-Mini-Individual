@@ -17,11 +17,23 @@ public class Main {
     }
 
     static String exibirMenu() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println();
         }
 
         return ("""
+                       ____     ______  ______     _____\\    \\ ___________             ____    _____    _____    \s
+                   ____\\_  \\__  \\     \\|\\     \\   /    / |    |\\          \\        ____\\_  \\__|\\    \\   \\    \\   \s
+                  /     /     \\  |     |\\|     | /    /  /___/| \\    /\\    \\      /     /     \\\\\\    \\   |    |  \s
+                 /     /\\      | |     |/____ / |    |__ |___|/  |   \\_\\    |    /     /\\      |\\\\    \\  |    |  \s
+                |     |  |     | |     |\\     \\ |       \\        |      ___/    |     |  |     | \\|    \\ |    |  \s
+                |     |  |     | |     | |     ||     __/ __     |      \\  ____ |     |  |     |  |     \\|    |  \s
+                |     | /     /| |     | |     ||\\    \\  /  \\   /     /\\ \\/    \\|     | /     /| /     /\\      \\ \s
+                |\\     \\_____/ |/_____/|/_____/|| \\____\\/    | /_____/ |\\______||\\     \\_____/ |/_____/ /______/|\s
+                | \\_____\\   | / |    |||     | || |    |____/| |     | | |     || \\_____\\   | /|      | |     | |\s
+                 \\ |    |___|/  |____|/|_____|/  \\|____|   | | |_____|/ \\|_____| \\ |    |___|/ |______|/|_____|/ \s
+                  \\|____|                              |___|/                     \\|____|                        \s
+                
                 ===========================================================================
                                                 MENU
                 ===========================================================================
@@ -99,9 +111,9 @@ public class Main {
                     }
 
                     case 2 -> {
+                        monitor.desativar();
                         Boolean ativa = false;
                         Boolean ativaValida = false;
-
                         System.out.println("Digite o número ou nome da agência referente a câmera: ");
                         String agencia = sc.nextLine();
 
@@ -119,7 +131,7 @@ public class Main {
                         System.out.println("\nCadastro realizado com sucesso!");
                     }
                     case 3 -> {
-
+                        monitor.desativar();
                         Boolean contObservando = false;
                         while (!contObservando) {
                             System.out.println("Digite o Id da câmera: ");
@@ -142,11 +154,11 @@ public class Main {
 
                     }
                     case 4 -> {
-
+                        monitor.desativar();
                         System.out.println(listarCameras(cameras));
                     }
                     case 5 -> {
-
+                        monitor.desativar();
                         Boolean contAtualizar = false;
                         while (!contAtualizar) {
                             System.out.println("Digite o Id da câmera: ");
@@ -171,7 +183,7 @@ public class Main {
                         }
                     }
                     case 6 -> {
-
+                        monitor.desativar();
                         Boolean excluida = false;
                         while (!excluida) {
                             try {
@@ -209,5 +221,4 @@ public class Main {
         }
         t.interrupt();
     }
-
 }
