@@ -27,14 +27,14 @@ public class Main {
                 ===========================================================================
                                          DIGITE O QUE DESEJA
                                          -------------------
-                (0) - Cadastrar uma câmera
-                (1) - Listar todas as câmeras
-                (2) - Observar câmeras
-                (3) - Alterar status da câmera
-                (4) - Sair
+                (0) - Sair
+                (1) - Ativar/Desativar monitoramento
+                (2) - Cadastrar uma câmera
+                (3) - Observar câmeras
+                (4) - Listar todas as câmeras
+                (5) - Alterar status da câmera
+                (6) - Excluir uma câmera
                 ===========================================================================
-                
-                Selecione uma opção: 
                 """);
     }
 
@@ -65,7 +65,12 @@ public class Main {
         while (continuarProg) {
 
             System.out.println(exibirMenu());
-            monitor.ativar();
+            if (monitor.getMonitorando()) {
+                System.out.println("Monitoramento ativado");
+            } else {
+                System.out.println("Monitoramento desativado");
+            }
+            System.out.println("Selecione uma opção: ");
             Integer opcao = 0;
             try {
                 Boolean opcaoValida = false;
@@ -73,7 +78,7 @@ public class Main {
                     try {
                         opcao = sc.nextInt();
                         sc.nextLine();
-                        if (opcao >= 0) { // ADICIONAR LIMITE
+                        if (opcao >= 0 && opcao <= 6) {
                             opcaoValida = true;
                         }
                     } catch (InputMismatchException e) {
@@ -82,8 +87,18 @@ public class Main {
                     }
                 }
                 switch (opcao) {
-                    case 0 -> {
-                        monitor.desativar();
+                    case 0 -> continuarProg = false;
+                    case 1 -> {
+                        if (monitor.getMonitorando()) {
+                            monitor.desativar();
+                            System.out.println("\nMonitoramento desativado");
+                        } else {
+                            monitor.ativar();
+                            System.out.println("\nMonitoramento ativado");
+                        }
+                    }
+
+                    case 2 -> {
                         Boolean ativa = false;
                         Boolean ativaValida = false;
 
@@ -102,15 +117,9 @@ public class Main {
                         }
                         cameras.add(new Camera(cameras.size() + 1, agencia, ativa));
                         System.out.println("\nCadastro realizado com sucesso!");
-                        continuarProg = voltarMenu();
                     }
-                    case 1 -> {
-                        monitor.desativar();
-                        System.out.println(listarCameras(cameras));
-                        continuarProg = voltarMenu();
-                    }
-                    case 2 -> {
-                        monitor.desativar();
+                    case 3 -> {
+
                         Boolean contObservando = false;
                         while (!contObservando) {
                             System.out.println("Digite o Id da câmera: ");
@@ -131,9 +140,13 @@ public class Main {
                             }
                         }
 
-                        continuarProg = voltarMenu();
                     }
-                    case 3 -> {
+                    case 4 -> {
+
+                        System.out.println(listarCameras(cameras));
+                    }
+                    case 5 -> {
+
                         Boolean contAtualizar = false;
                         while (!contAtualizar) {
                             System.out.println("Digite o Id da câmera: ");
@@ -156,13 +169,39 @@ public class Main {
                                 contAtualizar = true;
                             }
                         }
-                        continuarProg = voltarMenu();
                     }
-                    case 4 -> {
-                        continuarProg = false;
-                        monitor.desativar();
+                    case 6 -> {
+
+                        Boolean excluida = false;
+                        while (!excluida) {
+                            try {
+                                System.out.println("\nDigite o Id da câmera: ");
+                                Integer idCam = sc.nextInt();
+                                sc.nextLine();
+                                for (int i = 0; i < cameras.size(); i++) {
+                                    if (cameras.get(i).getIdentificador().equals(idCam)) {
+                                        cameras.remove(i);
+                                        System.out.println("\nExclusão realizada com sucesso!");
+                                        break;
+                                    } else if (i == (cameras.size() - 1)) {
+                                        System.out.println("\nNenhuma câmera encontrada para este id");
+                                    }
+                                }
+                                System.out.println("\nDeseja excluir novamente? (s/n): ");
+                                String exNovamente = sc.nextLine();
+                                while (!exNovamente.equals("s") && !exNovamente.equals("n")) {
+                                    System.out.println("\nErro, deseja excluir novamente? (s/n): ");
+                                    exNovamente = sc.nextLine();
+                                }
+                                excluida = exNovamente.equals("n");
+                            } catch (InputMismatchException e) {
+                                System.out.println("\nEntrada inválida digite novamente.");
+                                sc.nextLine();
+                            }
+                        }
                     }
                 }
+                continuarProg = voltarMenu();
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida digite novamente.");
                 sc.nextLine();

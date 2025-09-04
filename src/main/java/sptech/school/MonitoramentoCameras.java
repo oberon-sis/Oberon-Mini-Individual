@@ -30,6 +30,9 @@ public class MonitoramentoCameras implements Runnable {
     public MonitoramentoCameras(ArrayList<Camera> cameras) {
         this.cameras = cameras;
     }
+    public Boolean getMonitorando(){
+        return  monitorando;
+    }
 
     public void ativar() {
         monitorando = true;
@@ -59,8 +62,6 @@ public class MonitoramentoCameras implements Runnable {
                                 escolhida.setCenario(cen1);
                             }
                             System.out.printf("\n🚨 ALERTA: Houve uma movimentação na câmera %d da agência %s\nDigite o que deseja fazer: ", escolhida.getIdentificador(), escolhida.getAgencia());
-
-
                             desativar();
                         }
                     }

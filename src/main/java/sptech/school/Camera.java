@@ -20,22 +20,28 @@ public class Camera {
         this.agencia = agencia;
         this.ativa = ativa;
     }
+
     public Integer getIdentificador() {
         return identificador;
     }
+
     public String getAgencia() {
         return agencia;
     }
+
     public Boolean getAtiva() {
         return ativa;
     }
-    public void setAtiva(Boolean ativa){
+
+    public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
     }
+
     public String getCenario() {
         return cenario;
     }
-    public void setCenario(String cenario){
+
+    public void setCenario(String cenario) {
         this.cenario = cenario;
     }
 }
