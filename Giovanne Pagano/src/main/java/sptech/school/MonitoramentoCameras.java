@@ -47,7 +47,7 @@ public class MonitoramentoCameras implements Runnable {
             try {
                 if (monitorando) {
                     Thread.sleep(1000);
-                    int sorteio = ThreadLocalRandom.current().nextInt(0, 13);
+                    int sorteio = ThreadLocalRandom.current().nextInt(0, 10);
                     if (sorteio == 7) {
                         ArrayList<Camera> ativas = new ArrayList<>();
                         for (Camera c : cameras) {

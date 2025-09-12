@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Main {
     static String listarCameras(ArrayList<Camera> cameras) {
-        String resp = "==============================LISTA DE CÂMERAS=============================\n\n";
+        String resp = "========================================LISTA DE CÂMERAS========================================\n\n";
         for (Camera camera : cameras) {
-            resp += "\n---------------------------------------------------------------------------\n";
+            resp += "\n------------------------------------------------------------------------------------------------\n";
             String statusCam = camera.getAtiva() ? "Ativa" : "Desativada";
 
             resp += ("Id: %d -> Agência: %s | Status: %s").formatted(camera.getIdentificador(), camera.getAgencia(), statusCam);
@@ -34,11 +34,11 @@ public class Main {
                  \\ |    |___|/  |____|/|_____|/  \\|____|   | | |_____|/ \\|_____| \\ |    |___|/ |______|/|_____|/ \s
                   \\|____|                              |___|/                     \\|____|                        \s
                 
-                ===========================================================================
-                                                MENU
-                ===========================================================================
-                                         DIGITE O QUE DESEJA
-                                         -------------------
+                =================================================================================================
+                                                                MENU
+                =================================================================================================
+                                                        DIGITE O QUE DESEJA
+                                                       ----------------------
                 (0) - Sair
                 (1) - Ativar/Desativar monitoramento
                 (2) - Cadastrar uma câmera
@@ -46,7 +46,7 @@ public class Main {
                 (4) - Listar todas as câmeras
                 (5) - Alterar status da câmera
                 (6) - Excluir uma câmera
-                ===========================================================================
+                =================================================================================================
                 """);
     }
 
@@ -108,8 +108,8 @@ public class Main {
                             monitor.ativar();
                             System.out.println("\nMonitoramento ativado");
                         }
-                    }
 
+                    }
                     case 2 -> {
                         monitor.desativar();
                         Boolean ativa = false;
@@ -129,6 +129,7 @@ public class Main {
                         }
                         cameras.add(new Camera(cameras.size() + 1, agencia, ativa));
                         System.out.println("\nCadastro realizado com sucesso!");
+                        continuarProg = voltarMenu();
                     }
                     case 3 -> {
                         monitor.desativar();
@@ -151,11 +152,12 @@ public class Main {
                                 contObservando = true;
                             }
                         }
-
+                        continuarProg = voltarMenu();
                     }
                     case 4 -> {
                         monitor.desativar();
                         System.out.println(listarCameras(cameras));
+                        continuarProg = voltarMenu();
                     }
                     case 5 -> {
                         monitor.desativar();
@@ -181,6 +183,7 @@ public class Main {
                                 contAtualizar = true;
                             }
                         }
+                        continuarProg = voltarMenu();
                     }
                     case 6 -> {
                         monitor.desativar();
@@ -211,11 +214,12 @@ public class Main {
                                 sc.nextLine();
                             }
                         }
+                        continuarProg = voltarMenu();
                     }
                 }
-                continuarProg = voltarMenu();
+
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida digite novamente.");
+                System.out.println("Entrada inválida");
                 sc.nextLine();
             }
         }
